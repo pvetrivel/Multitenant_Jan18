@@ -1,0 +1,50 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        temp.use_jdbc_metadata_defaults: false
+        order_inserts: true
+        order_updates: true
+        jdbc:
+          lob.non_contextual_creation: true
+          batch_size: 20
+          fetch_size: 20
+          batch_versioned_data: true
+
+logging:
+  level:
+    jdbc:
+      sqlonly: info
+      resultsettable: info
+      sqltiming: fatal
+      audit: fatal
+      resultset: fatal
+      connection: info
+
+    org:
+      springframework.orm.jpa: debug
+      hibernate.jdbc: debug
+    com.tekion.jan_17.tenant_jan17: debug
+
+
+#tenant:
+#  one:
+#    url: "jdbc:mysql://localhost:3306/datasource1"
+#    username: "root"
+#    password: "Spring@123"
+#  two:
+#    url: "jdbc:mysql://localhost:3306/datasource1"
+#      username: "root"
+#      password: "Spring@123"
+
+
