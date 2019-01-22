@@ -4,28 +4,28 @@ package com.tekion.tenant.MultiTenant_Prj.controller;
 import java.sql.SQLException;
 import java.util.Random;
 
+import com.tekion.tenant.MultiTenant_Prj.repo.ModelRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.tekion.tenant.MultiTenant_Prj.model.Model;
-import com.tekion.tenant.MultiTenant_Prj.service.ModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.tekion.tenant.MultiTenant_Prj.multiTenant.MultiTenantManager;
-import com.tekion.tenant.MultiTenant_Prj.multiTenant.TenantNotFoundException;
-import com.tekion.tenant.MultiTenant_Prj.multiTenant.TenantResolvingException;
 
 @Slf4j
 @RestController
 @RequestMapping("/models")
 public class ModelController {
 
-	private final ModelService modelService;
+
+	@Autowired
+	private ModelRepo modelService;
 	private final MultiTenantManager tenantManager;
 
 
 	@Autowired
-	public ModelController(ModelService modelService, MultiTenantManager tenantManager) {
-		this.modelService = modelService;
+	public ModelController(MultiTenantManager tenantManager) {
+		//this.modelService = modelService;
 		this.tenantManager = tenantManager;
 	}
 
@@ -70,8 +70,9 @@ public class ModelController {
 
 }
 
-//	Try to get using Thread local value
+//Try to get using Thread local value
 //	@GetMapping("/collect")
-//	public ResponseEntity<?> get() throws SQLException, TenantResolvingException, TenantNotFoundException {
+//	public ResponseEntity<?> get() {
 //		return ResponseEntity.ok(modelService.findAll());
 //	}
+
