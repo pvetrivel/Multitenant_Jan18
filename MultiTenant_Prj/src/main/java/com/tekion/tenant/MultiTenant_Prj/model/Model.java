@@ -1,24 +1,40 @@
 package com.tekion.tenant.MultiTenant_Prj.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
-import java.time.Instant;
-
-import static com.fasterxml.jackson.annotation.JsonFormat.Shape.STRING;
 
 @Data
 @NoArgsConstructor
-@Entity(name = "models")
+@Entity
 public class Model {
 	
 	@Id
-	private int id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false, nullable = false)
+	private Long id;
 	@Column(nullable = false)
 	private String name;
+	private String created_on;
+	private String update_on;
+
+	public String getCreated_on() {
+		return created_on;
+	}
+
+	public void setCreated_on(long currentMillis) {
+		this.created_on =""+ currentMillis;
+	}
+
+	public String getUpdate_on() {
+		return update_on;
+	}
+
+	public void setUpdate_on(long currentMillis) {
+		this.update_on = ""+currentMillis;
+	}
 
 	private String tenant;
 
@@ -26,11 +42,11 @@ public class Model {
 		this.tenant = tenant;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -49,4 +65,6 @@ public class Model {
 	public void setTenant(String tenant) {
 		this.tenant = tenant;
 	}
+
+
 }

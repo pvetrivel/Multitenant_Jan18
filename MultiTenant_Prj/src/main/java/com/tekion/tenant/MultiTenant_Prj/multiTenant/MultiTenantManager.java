@@ -38,7 +38,7 @@ public class MultiTenantManager {
 
 	//Executed by repository during api call
 	@Bean
-	public DataSource dataSource() {
+	public DataSource datazSource() {
 		multiTenantDataSource = new AbstractRoutingDataSource() {
 			@Override
 			protected Object determineCurrentLookupKey() {
@@ -58,6 +58,7 @@ public class MultiTenantManager {
 		}
 		currentTenant.set(tenantId);
 	}
+
 
 	//Checking tenant available in Master service class
 	public boolean tenantIsAbsent(String tenantId) {
